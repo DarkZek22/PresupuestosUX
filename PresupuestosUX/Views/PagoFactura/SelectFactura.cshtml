@@ -1,0 +1,11 @@
+﻿@model PresupuestosUX.FACTURA_PROVEEDOR
+
+@using (Html.BeginForm("BuscarFactura", "PagoFactura", FormMethod.Post))
+{
+    <hr />
+    <nav class="navbar navbar-dark" style="background-color: #FAEEEE;">
+        <a>Ingresar No. De factura:</a>
+        <input class="form-control" type="text" name="BuscarFactura" />
+        <input type="submit" value="Buscar factura" class="btn btn-danger" />
+    </nav>
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PresupuestosUX.FACTURA_PROVEEDOR>
+@using PresupuestosUX.Controllers
+<div>
+    @Html.Partial("SelectFactura")
+</div>
+
+<div class="panel-body">
+    <table class="table">
+        <tr>
+            <th>Folio</th>
+            <th>Descripcion</th>
+            <th>Saldo</th>
+            <th>Saldo pendiente</th>
+            <th>Estatus</th>
+            <th>Fecha</th>
+            <th>Proveedor</th>
+        </tr>
+        @if (ViewBag.FacturaEncontrada == true)
+        {
+            <tr>
+                <th>@ViewBag.Folio</th>
+                <th>@ViewBag.DescFactura</th>
+                <th>$@ViewBag.Saldo</th>
+                <th>@ViewBag.SaldoRestante</th>
+                <th>@ViewBag.Estatus</th>
+                <th>@ViewBag.Fecha</th>
+                <th>@ViewBag.Proveedor</th>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        }
+    </table>
+</div>
+@if (ViewBag.Estatus == "Pagado")
+{
+    
+}
+else
+{
+    <div>
+        @Html.Partial("PagoFactura")
+    </div>
+}
+
