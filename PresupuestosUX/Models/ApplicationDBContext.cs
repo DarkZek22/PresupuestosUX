@@ -1,4 +1,4 @@
-namespace PresupuestosUX
+namespace PresupuestosUX.Models
 {
     using System;
     using System.Data.Entity;
@@ -8,7 +8,7 @@ namespace PresupuestosUX
     public partial class ApplicationDBContext : DbContext
     {
         public ApplicationDBContext()
-            : base("name=ApplicationDBContext2")
+            : base("name=ApplicationDBContext")
         {
         }
 
@@ -17,6 +17,7 @@ namespace PresupuestosUX
         public virtual DbSet<AREAS> AREAS { get; set; }
         public virtual DbSet<ASIGNACIONES> ASIGNACIONES { get; set; }
         public virtual DbSet<ASIGNACIONES_LISTA> ASIGNACIONES_LISTA { get; set; }
+        public virtual DbSet<BANCO_SALDOS> BANCO_SALDOS { get; set; }
         public virtual DbSet<BANCOS> BANCOS { get; set; }
         public virtual DbSet<CAJA_CHICA> CAJA_CHICA { get; set; }
         public virtual DbSet<CAT_PRODUCTOS> CAT_PRODUCTOS { get; set; }
@@ -24,6 +25,7 @@ namespace PresupuestosUX
         public virtual DbSet<EMPLEADOS> EMPLEADOS { get; set; }
         public virtual DbSet<ESTATUS_PAGO_PROVEEDOR> ESTATUS_PAGO_PROVEEDOR { get; set; }
         public virtual DbSet<FACTURA_PROVEEDOR> FACTURA_PROVEEDOR { get; set; }
+        public virtual DbSet<FACTURA_RECIBO_PAGO> FACTURA_RECIBO_PAGO { get; set; }
         public virtual DbSet<GASTOS_CAJAS> GASTOS_CAJAS { get; set; }
         public virtual DbSet<INGRESO> INGRESO { get; set; }
         public virtual DbSet<MOV_ENTRADA> MOV_ENTRADA { get; set; }
@@ -61,6 +63,16 @@ namespace PresupuestosUX
             modelBuilder.Entity<BANCOS>()
                 .Property(e => e.CUENTA)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<BANCOS>()
+                .HasMany(e => e.BANCO_SALDOS)
+                .WithOptional(e => e.BANCOS)
+                .HasForeignKey(e => e.ID_BANCO);
+
+            modelBuilder.Entity<BANCOS>()
+                .HasMany(e => e.FACTURA_RECIBO_PAGO)
+                .WithOptional(e => e.BANCOS)
+                .HasForeignKey(e => e.ID_BANCO);
 
             modelBuilder.Entity<BANCOS>()
                 .HasMany(e => e.INGRESO)
@@ -137,6 +149,16 @@ namespace PresupuestosUX
                 .Property(e => e.FECHA)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<FACTURA_PROVEEDOR>()
+                .HasMany(e => e.FACTURA_RECIBO_PAGO)
+                .WithOptional(e => e.FACTURA_PROVEEDOR)
+                .HasForeignKey(e => e.ID_FACTURA);
+
+            modelBuilder.Entity<FACTURA_PROVEEDOR>()
+                .HasMany(e => e.PAGO_PROVEEDOR)
+                .WithOptional(e => e.FACTURA_PROVEEDOR)
+                .HasForeignKey(e => e.ID_FACTURA);
+
             modelBuilder.Entity<INGRESO>()
                 .Property(e => e.DESC_INGRESO)
                 .IsUnicode(false);
@@ -159,6 +181,10 @@ namespace PresupuestosUX
                 .HasMany(e => e.SUB_PARTIDAS)
                 .WithOptional(e => e.PARTIDAS)
                 .HasForeignKey(e => e.IDPARTIDA);
+
+            modelBuilder.Entity<PRESUPUESTO_MENSUAL>()
+                .Property(e => e.MES)
+                .IsUnicode(false);
 
             modelBuilder.Entity<PRESUPUESTO_MENSUAL>()
                 .HasMany(e => e.CAJA_CHICA)

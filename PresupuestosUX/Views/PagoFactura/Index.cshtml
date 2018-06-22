@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PresupuestosUX.FACTURA_PROVEEDOR>
+﻿@model IEnumerable<PresupuestosUX.Models.FACTURA_PROVEEDOR>
 @using PresupuestosUX.Controllers
 <div>
     @Html.Partial("SelectFactura")
@@ -43,7 +43,7 @@
 </div>
 @if (ViewBag.Estatus == "Pagado")
 {
-    
+
 }
 else
 {

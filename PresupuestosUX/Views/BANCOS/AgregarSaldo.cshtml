@@ -1,4 +1,4 @@
-﻿@model PresupuestosUX.BANCOS
+﻿@model PresupuestosUX.Models.BANCOS
 
 <h2>Agregar Saldo</h2>
 
@@ -14,7 +14,7 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Bancos:</label>
             <div class="col-sm-6">
-                @Html.DropDownList("BANCOSID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
             </div>
         </div>

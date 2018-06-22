@@ -1,4 +1,4 @@
-namespace PresupuestosUX
+namespace PresupuestosUX.Models
 {
     using System;
     using System.Collections.Generic;
@@ -27,6 +27,9 @@ namespace PresupuestosUX
 
         [Column(TypeName = "date")]
         public DateTime FECHA_PRES { get; set; }
+
+        [StringLength(25)]
+        public string MES { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CAJA_CHICA> CAJA_CHICA { get; set; }

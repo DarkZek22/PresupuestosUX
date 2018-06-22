@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PresupuestosUX;
+using PresupuestosUX.Models;
 
 namespace PresupuestosUX.Controllers
 {
@@ -49,7 +49,7 @@ namespace PresupuestosUX.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DESC_FACTURA,SALDO,FOLIO,IDPROVEEDOR")] FACTURA_PROVEEDOR fACTURA_PROVEEDOR)
+        public ActionResult Create([Bind(Include = "ID,DESC_FACTURA,SALDO,FOLIO,FECHA,IDPROVEEDOR")] FACTURA_PROVEEDOR fACTURA_PROVEEDOR)
         {
             if (ModelState.IsValid)
             {

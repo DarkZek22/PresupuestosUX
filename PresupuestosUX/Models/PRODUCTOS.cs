@@ -1,4 +1,4 @@
-namespace PresupuestosUX
+namespace PresupuestosUX.Models
 {
     using System;
     using System.Collections.Generic;

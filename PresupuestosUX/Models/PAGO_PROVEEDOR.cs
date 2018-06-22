@@ -1,4 +1,4 @@
-namespace PresupuestosUX
+namespace PresupuestosUX.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,12 +18,12 @@ namespace PresupuestosUX
 
         public int? IDPRESUPUESTOMENSUAL { get; set; }
 
-        public int? IDFACTURA { get; set; }
+        public int? ID_FACTURA { get; set; }
 
         public virtual ESTATUS_PAGO_PROVEEDOR ESTATUS_PAGO_PROVEEDOR { get; set; }
 
-        public virtual PRESUPUESTO_MENSUAL PRESUPUESTO_MENSUAL { get; set; }
+        public virtual FACTURA_PROVEEDOR FACTURA_PROVEEDOR { get; set; }
 
-        public virtual FACTURA_PROVEEDOR FACTURA_PROVEEDOR{ get; set; }
+        public virtual PRESUPUESTO_MENSUAL PRESUPUESTO_MENSUAL { get; set; }
     }
 }

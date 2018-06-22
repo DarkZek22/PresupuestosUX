@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PresupuestosUX;
+using PresupuestosUX.Models;
 namespace PresupuestosUX.Controllers
 {
     public class BANCOSController : Controller
@@ -22,7 +22,7 @@ namespace PresupuestosUX.Controllers
 
         public ActionResult AgregarSaldo()
         {
-            ViewBag.BANCOSID = new SelectList(db.BANCOS, "ID", "NOMBRE");
+            ViewBag.ID = new SelectList(db.BANCOS, "ID", "NOMBRE");
             return View();
         }
 
@@ -35,12 +35,12 @@ namespace PresupuestosUX.Controllers
             int id = bANCOS.ID;
             double saldo = bANCOS.SALDO;
 
-            var command = new SqlCommand("SELECT SALDO FROM BANCOS WHERE ID="+id+"", con);
-            double saldodb = (double)(command.ExecuteScalar());
+            var command = new SqlCommand("UPDATE BANCOS SET SALDO = "+saldo+" WHERE ID=" + id + "", con);
+            command.ExecuteNonQuery();
 
-            double nuevosaldo = saldo + saldodb;
+            string fecha = "" + DateTime.Now.Day + "/" + DateTime.Now.Month + "/" + DateTime.Now.Year + "";
 
-            var command2 = new SqlCommand("UPDATE BANCOS SET SALDO = "+nuevosaldo+" WHERE ID=" + id + "", con);
+            var command2 = new SqlCommand("INSERT INTO BANCO_SALDOS (SALDO, FECHA_SALDO, ID_BANCO) VALUES ("+saldo+", "+fecha+","+id+")", con);
             command2.ExecuteNonQuery();
 
             return RedirectToAction("Index");

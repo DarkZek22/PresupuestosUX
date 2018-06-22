@@ -1,4 +1,4 @@
-namespace PresupuestosUX
+namespace PresupuestosUX.Models
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,11 @@ namespace PresupuestosUX
 
     public partial class FACTURA_PROVEEDOR
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FACTURA_PROVEEDOR()
         {
-            FECHA = DateTime.Now.ToString();
+            FACTURA_RECIBO_PAGO = new HashSet<FACTURA_RECIBO_PAGO>();
+            PAGO_PROVEEDOR = new HashSet<PAGO_PROVEEDOR>();
         }
 
         public int ID { get; set; }
@@ -31,8 +33,12 @@ namespace PresupuestosUX
 
         public int? IDPROVEEDOR { get; set; }
 
-        public virtual ICollection<PAGO_PROVEEDOR> PAGO_PROVEEDOR { get; set; }
-
         public virtual PROVEEDORES PROVEEDORES { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FACTURA_RECIBO_PAGO> FACTURA_RECIBO_PAGO { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PAGO_PROVEEDOR> PAGO_PROVEEDOR { get; set; }
     }
 }
